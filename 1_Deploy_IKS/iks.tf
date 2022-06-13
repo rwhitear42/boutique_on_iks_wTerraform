@@ -105,19 +105,28 @@ resource "local_file" "iks_kubeconfig" {
   ]
 }
 
-# # Untaint all nodes. 
-# resource "null_resource" "remove_iks_taints" {
-#   triggers = {
-#     kubeconfig_path = local_file.iks_kubeconfig.filename
-#   }
-#   provisioner "local-exec" {
-#     command = <<EOT
-# kubectl --kubeconfig ${self.triggers.kubeconfig_path} get nodes -o json | jq '.items[].spec.taints' 
-# kubectl taint node --all node-role.kubernetes.io/master:NoSchedule- --kubeconfig ${self.triggers.kubeconfig_path}
-# kubectl taint node --all node.cloudprovider.kubernetes.io/uninitialized- --kubeconfig ${self.triggers.kubeconfig_path}
-# EOT
-#   }
-#   depends_on = [
-#     local_file.iks_kubeconfig
-#   ]
-# }
+# Save kubeconfig file to Boutique deployment subdirectory.
+resource "local_file" "iks_boutique_kubeconfig" {
+  content  = base64decode(data.intersight_kubernetes_cluster.kubeconfig.results[0].kube_config)
+  filename = "../2_Deploy_Boutique/kubeconfig.yaml"
+  depends_on = [
+    data.intersight_kubernetes_cluster.kubeconfig
+  ]
+}
+
+# Untaint all nodes. 
+resource "null_resource" "remove_iks_taints" {
+  triggers = {
+    kubeconfig_path = local_file.iks_kubeconfig.filename
+  }
+  provisioner "local-exec" {
+    command = <<EOT
+kubectl --kubeconfig ${self.triggers.kubeconfig_path} get nodes -o json | jq '.items[].spec.taints' 
+kubectl taint node --all node-role.kubernetes.io/master:NoSchedule- --kubeconfig ${self.triggers.kubeconfig_path}
+kubectl taint node --all node.cloudprovider.kubernetes.io/uninitialized- --kubeconfig ${self.triggers.kubeconfig_path}
+EOT
+  }
+  depends_on = [
+    local_file.iks_kubeconfig
+  ]
+}

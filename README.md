@@ -12,7 +12,8 @@
 - cd 1_Deploy_IKS
 - Update creds.yml with Intersight API key and Base64 encoded secret key
 
-- tf plan -target=module.iks -out plan.out && apply plan.out
+- terraform plan -target=module.iks -var='iks_cluster_name=rwhitear' -out plan.out && terraform apply plan.out
+- terraform plan -var='iks_cluster_name=rwhitear' -var="iks_cluster_action=Deploy" -out plan.out && terraform apply plan.out
 
 ## Step 2 - Deploy Google Boutique App onto IKS
 
