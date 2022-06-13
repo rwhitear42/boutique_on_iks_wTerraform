@@ -12,6 +12,7 @@
 - cd 1_Deploy_IKS
 - Update creds.yml with Intersight API key and Base64 encoded secret key
 
+- tf plan -target=module.iks -out plan.out && apply plan.out
 
 ## Step 2 - Deploy Google Boutique App onto IKS
 

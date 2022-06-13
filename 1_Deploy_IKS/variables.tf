@@ -1,6 +1,6 @@
 variable "iks_cluster_name" {
   type = string
-  default = "default"
+  # default = "default"
 }
 
 variable "iks_cluster_action" {
