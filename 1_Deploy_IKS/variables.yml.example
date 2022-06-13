@@ -1,0 +1,64 @@
+# ip_pool
+ip_pool:
+  iks_ip_pool_name: iks_pool_10.11.42.150-249
+  iks_ip_pool_use_existing: true
+
+# sysconfig
+sysconfig:
+  iks_sysconfig_use_existing: false
+  iks_dns_ip: 10.0.10.210
+  iks_ntp_ip: 10.0.10.210
+  iks_timezone: Europe/London
+
+# k8s_network
+network:
+  iks_k8s_network_use_existing: false
+  iks_pod_cidr: 100.65.0.0/16
+  iks_service_cidr: 100.64.0.0/24
+  iks_cni: Calico
+
+# versionPolicy
+version_policy:
+  iks_version_policy_use_existing: false
+  iks_version_policy_name: k8s-version-v1.21.11-policy
+  iks_version_name: "1.21.11-iks.2"
+  
+# tr_policy
+trusted_registry_policy:
+  iks_tr_policy_use_existing: false
+  iks_tr_policy_create_new: false
+  
+# runtime_policy
+runtime_policy:
+  iks_proxy_hostname: proxy.com
+  
+# infraConfigPolicy
+vm_infra_policy:
+  iks_infra_config_policy_use_existing: false
+  iks_infra_config_policy_platform_type: esxi
+  iks_infra_config_policy_vc_target_name: <VCENTER_IP_OR_HOSTNAME>
+  iks_infra_config_policy_interfaces: 'IKS|IKS-ANP|IKS-EPG'
+  iks_infra_config_policy_vc_datastore_name: DS-LON
+  iks_infra_config_policy_vc_cluster_name: PROD-LON-CLUSTER
+  iks_infra_config_policy_vc_password_b64: <VCENTER_PASSWORD_BASE64_ENCODED>
+  
+# instance_type
+vm_instance_policy:
+  iks_instance_type_use_existing: false
+  iks_instance_type_cpu: 4
+  iks_instance_type_memory: 8192
+  iks_instance_type_disk_size: 50
+  
+# cluster
+cluster_profile:
+  iks_wait_for_completion: true
+  iks_cluster_worker_nodes: 2
+  iks_cluster_load_balancers: 3
+  iks_cluster_worker_max: 5
+  iks_cluster_control_nodes: 1
+  iks_cluster_ssh_user: iksadmin
+  iks_cluster_ssh_public_key: '<SSH_PUBLIC_KEY>'
+  
+# organisation
+organisation:
+  iks_organisation: default

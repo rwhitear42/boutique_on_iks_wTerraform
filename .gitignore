@@ -1,0 +1,12 @@
+1_Deploy_IKS/.terraform/
+1_Deploy_IKS/.terraform.lock.hcl
+1_Deploy_IKS/terraform.tfstate*
+1_Deploy_IKS/SecretKey.txt
+1_Deploy_IKS/creds.yml
+1_Deploy_IKS/plan.out
+1_Deploy_IKS/variables.yml
+
+2_Deploy_Boutique/.terraform/
+2_Deploy_Boutique/.terraform.lock.hcl
+2_Deploy_Boutique/terraform.tfstate*
+2_Deploy_Boutique/plan.out
