@@ -86,3 +86,38 @@ module "iks" {
   organization = local.model.organisation.iks_organisation
 
 }
+
+# Retrieve kubeconfig file from IKS cluster.
+data "intersight_kubernetes_cluster" "kubeconfig" {
+  name = var.iks_cluster_name
+
+  depends_on = [
+    module.iks
+  ]
+}
+
+# Save kubeconfig file to local filesystem.
+resource "local_file" "iks_kubeconfig" {
+  content  = base64decode(data.intersight_kubernetes_cluster.kubeconfig.results[0].kube_config)
+  filename = "./kubeconfig.yaml"
+  depends_on = [
+    data.intersight_kubernetes_cluster.kubeconfig
+  ]
+}
+
+# # Untaint all nodes. 
+# resource "null_resource" "remove_iks_taints" {
+#   triggers = {
+#     kubeconfig_path = local_file.iks_kubeconfig.filename
+#   }
+#   provisioner "local-exec" {
+#     command = <<EOT
+# kubectl --kubeconfig ${self.triggers.kubeconfig_path} get nodes -o json | jq '.items[].spec.taints' 
+# kubectl taint node --all node-role.kubernetes.io/master:NoSchedule- --kubeconfig ${self.triggers.kubeconfig_path}
+# kubectl taint node --all node.cloudprovider.kubernetes.io/uninitialized- --kubeconfig ${self.triggers.kubeconfig_path}
+# EOT
+#   }
+#   depends_on = [
+#     local_file.iks_kubeconfig
+#   ]
+# }
