@@ -5,9 +5,11 @@
 1_Deploy_IKS/creds.yml
 1_Deploy_IKS/plan.out
 1_Deploy_IKS/variables.yml
+1_Deploy_IKS/kubeconfig.yaml
 
 2_Deploy_Boutique/.terraform/
 2_Deploy_Boutique/.terraform.lock.hcl
 2_Deploy_Boutique/terraform.tfstate*
 2_Deploy_Boutique/creds.yml
 2_Deploy_Boutique/plan.out
+2_Deploy_Boutique/kubeconfig.yaml
