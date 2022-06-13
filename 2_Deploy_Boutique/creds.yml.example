@@ -1,0 +1,3 @@
+# Intersight Access
+intersight_api_key: '<INTERSIGHT_API_KEY'
+intersight_secretkey_b64: '<INTERSIGHT_SECRET_KEY_BASE64_ENCODED'

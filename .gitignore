@@ -9,4 +9,5 @@
 2_Deploy_Boutique/.terraform/
 2_Deploy_Boutique/.terraform.lock.hcl
 2_Deploy_Boutique/terraform.tfstate*
+2_Deploy_Boutique/creds.yml
 2_Deploy_Boutique/plan.out
