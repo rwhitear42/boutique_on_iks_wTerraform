@@ -5,5 +5,5 @@ variable "iks_cluster_name" {
 
 variable "iks_cluster_action" {
   type = string
-  default = "Undeploy"
+  default = "Unassign"
 }
