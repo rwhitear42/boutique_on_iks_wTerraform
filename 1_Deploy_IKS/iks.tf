@@ -112,7 +112,7 @@ data "intersight_kubernetes_cluster" "kubeconfig" {
 # Save kubeconfig file to local filesystem.
 resource "local_file" "iks_kubeconfig" {
   content  = base64decode(data.intersight_kubernetes_cluster.kubeconfig.results[0].kube_config)
-  filename = "./kubeconfig.yaml"
+  filename = "./${var.iks_cluster_name}-kubeconfig.yaml"
   depends_on = [
     data.intersight_kubernetes_cluster.kubeconfig
   ]
@@ -121,7 +121,7 @@ resource "local_file" "iks_kubeconfig" {
 # Save kubeconfig file to Boutique deployment subdirectory.
 resource "local_file" "iks_boutique_kubeconfig" {
   content  = base64decode(data.intersight_kubernetes_cluster.kubeconfig.results[0].kube_config)
-  filename = "../2_Deploy_Boutique/kubeconfig.yaml"
+  filename = "../2_Deploy_Boutique/${var.iks_cluster_name}-kubeconfig.yaml"
   depends_on = [
     data.intersight_kubernetes_cluster.kubeconfig
   ]
