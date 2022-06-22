@@ -52,15 +52,16 @@ module "iks" {
   }
 
   infraConfigPolicy = {
-    use_existing = local.model.vm_infra_policy.iks_infra_config_policy_use_existing
-    platformType = local.model.vm_infra_policy.iks_infra_config_policy_platform_type
-    policyName   = "${var.iks_cluster_name}-vm-infra-policy"
-    vcTargetName   = local.model.vm_infra_policy.iks_infra_config_policy_vc_target_name
-    interfaces     = [local.model.vm_infra_policy.iks_infra_config_policy_interfaces]
-    vcDatastoreName    = local.model.vm_infra_policy.iks_infra_config_policy_vc_datastore_name
-    vcClusterName      = local.model.vm_infra_policy.iks_infra_config_policy_vc_cluster_name
-    vcResourcePoolName = ""
-    vcPassword         = base64decode(local.model.vm_infra_policy.iks_infra_config_policy_vc_password_b64)
+    use_existing = true
+    policyName   = "DEFAULT_VM_INFRA_POLICY"
+    # policyName   = "${var.iks_cluster_name}-vm-infra-policy"
+    # platformType = local.model.vm_infra_policy.iks_infra_config_policy_platform_type
+    # vcTargetName   = local.model.vm_infra_policy.iks_infra_config_policy_vc_target_name
+    # interfaces     = [local.model.vm_infra_policy.iks_infra_config_policy_interfaces]
+    # vcDatastoreName    = local.model.vm_infra_policy.iks_infra_config_policy_vc_datastore_name
+    # vcClusterName      = local.model.vm_infra_policy.iks_infra_config_policy_vc_cluster_name
+    # vcResourcePoolName = ""
+    # vcPassword         = base64decode(local.model.vm_infra_policy.iks_infra_config_policy_vc_password_b64)
   }
 
   addons       = [

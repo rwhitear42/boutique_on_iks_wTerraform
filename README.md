@@ -17,6 +17,7 @@
 
 ## Step 2 - Deploy Google Boutique App onto IKS
 
+terraform destroy -var='iks_cluster_name=rwhitear' --auto-approve
 
 ### Resources
 Git repository

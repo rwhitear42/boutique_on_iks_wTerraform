@@ -17,9 +17,11 @@ provider "kubernetes" {
 }
 
 provider "intersight" {
-  apikey    = var.intersight_api_key
-  secretkey = base64decode(var.intersight_secretkey_b64)
+  apikey    = local.creds.intersight_api_key
+  secretkey = base64decode(local.creds.intersight_secretkey_b64)
   endpoint  = "https://intersight.com"
 }
 
-
+locals {
+  creds = yamldecode(file("creds.yml"))
+}
