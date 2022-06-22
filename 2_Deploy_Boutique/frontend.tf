@@ -167,7 +167,7 @@ resource "kubernetes_service_v1" "frontend_external" {
       target_port = 8080
     }
 
-    type = "NodePort"
+    type = "LoadBalancer"
   }
 
   depends_on = [

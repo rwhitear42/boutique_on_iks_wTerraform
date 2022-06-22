@@ -63,6 +63,18 @@ module "iks" {
     vcPassword         = base64decode(local.model.vm_infra_policy.iks_infra_config_policy_vc_password_b64)
   }
 
+  addons       = [
+    {
+    createNew = true
+    addonPolicyName = "smm-tf"
+    addonName            = "smm"
+    description       = "SMM Policy"
+    upgradeStrategy  = "AlwaysReinstall"
+    installStrategy  = "InstallOnly"
+    releaseVersion = "1.8.2-cisco5-helm3"
+    overrides = yamlencode({"demoApplication":{"enabled":true}})
+    }
+  ]
   instance_type = {
     use_existing = local.model.vm_instance_policy.iks_instance_type_use_existing
     name         = "${var.iks_cluster_name}-vm-instance-policy"
